@@ -13,3 +13,10 @@ function renderButtons(){
         $("button-view").append(a);
     }
 }
+
+$("add-car").on("click",function(event){
+    event.preventDefault();
+    const car = $("#car-input").val().trim();
+    cars.push(car);
+    renderButtons();
+})
