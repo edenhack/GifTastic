@@ -24,50 +24,46 @@ $("#add-car").on("click", function (event) {
 });
 
 
-// FIXME on click button giphy search api call.
+// on click button giphy search api call.
 function displayCarInfo() {
 
     const apiKey = "twTHuGw6oDIHbPETsVzkb0cXOJcK4Eqd";
     const carVal = $(this).attr("data-car");
-    const queryURL = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${carVal}&limit=1&rating=G`;
+    const queryURL = `https://api.giphy.com/v1/gifs/random?api_key=${apiKey}&tag=${carVal}&rating=G`;
 
     $.ajax({
             url: queryURL,
             method: "GET"
         })
         .then(function (response) {
-            // console.log(response);
+            //console.log(response);
             const carDiv = $("<div class='carDiv'>");
             const results = response.data;
-            for (let i = 0; i < results.length; i++) {
-                $(this).addClass("gif");
-                const imgURL = results[i].images.fixed_height_small_still.url;
-                const image = $("<img id = 'gif'>").attr("src", imgURL);
-                $(this).attr("data-state", "still");
-                carDiv.append(image);
-                $("#Image-View").prepend(carDiv);
+            $(this).addClass("gif");
+            const imgURL = results.images.fixed_height_small_still.url;
+            const image = $("<img id = 'gif'>").attr("src", imgURL);
+            $(this).attr("data-state", "still");
+            carDiv.append(image);
+            $("#Image-View").prepend(carDiv);
 
-                //consts for still and animate gif links
-                const still = results[i].images.fixed_height_small_still.url;
-                const animate = results[i].images.fixed_height_small.url;
+            //consts for still and animate gif links
+            const still = results.images.fixed_height_small_still.url;
+            const animate = results.images.fixed_height_small.url;
 
-                // consts for the data attributes of the gifs
-                const animatedGif = image.attr("data-animated", animate);
-                const stillGif = image.attr("data-still", still);
+            // consts for the data attributes of the gifs
+            const animatedGif = image.attr("data-animated", animate);
+            const stillGif = image.attr("data-still", still);
 
-                $("#gif").on("click", function () {
-                    const state = $(this).attr("data-state");
-                    if (state === "still") {
-                        $(this).attr("src", animate);
-                        $(this).attr("data-state", "animate");
-                    } else {
-                        $(this).attr("src", still);
-                        $(this).attr("data-state", "still");
-                    }
-                });
-
-
-            }
+            $("#gif").on("click", function () {
+                const state = $(this).attr("data-state");
+                if (state === "still") {
+                    $(this).attr("src", animate);
+                    $(this).attr("data-state", "animate");
+                } else {
+                    $(this).attr("src", still);
+                    $(this).attr("data-state", "still");
+                }
+            });
         });
 };
 $(document).on("click", ".btn-success", displayCarInfo);
