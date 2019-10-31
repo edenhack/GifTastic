@@ -42,7 +42,7 @@ function displayCarInfo() {
             for (let i = 0; i < results.length; i++) {
                 $(this).addClass("gif");
                 const imgURL = results[i].images.fixed_height_small_still.url;
-                const image = $("<img>").attr("src", imgURL);
+                const image = $("<img id = 'gif'>").attr("src", imgURL);
                 $(this).attr("data-state", "still");
                 carDiv.append(image);
                 $("#Image-View").prepend(carDiv);
@@ -55,7 +55,7 @@ function displayCarInfo() {
                 const animatedGif = image.attr("data-animated", animate);
                 const stillGif = image.attr("data-still", still);
 
-                $(".gif").on("click", function () {
+                $("#gif").on("click", function () {
                     const state = $(this).attr("data-state");
                     if (state === "still") {
                         $(this).attr("src", animate);
