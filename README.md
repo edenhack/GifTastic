@@ -5,3 +5,5 @@
 * Uses api to search for image related to the button
 * Animates the gifs on click
 * Uses nested functions to process
+
+https://edenhack.github.io/GifTastic
